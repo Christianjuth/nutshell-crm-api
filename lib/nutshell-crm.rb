@@ -77,6 +77,11 @@ module NutshellCrm
       exec_request build_payload({:stepId => step_id, :rev => rev, :step => step})
     end
 
+    # Edit a task.
+    def edit_task(task_id, rev, task)
+      exec_request build_payload({:taskId => task_id, :rev => rev, :task => task})
+    end
+
     # Find accounts matching a specified query.
     def find_accounts(query, order_by = nil, order_direction = nil, limit = nil, page = nil, stub_responses = nil)
       params = {:query => query, :orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page, :stubResponses => stub_responses}
@@ -194,6 +199,13 @@ module NutshellCrm
       exec_request build_payload
     end
 
+    # Returns an array containing tasks for the given query.
+    def find_tasks(query)
+      params = {:query => query}
+      payload = build_payload params
+      exec_request(payload)
+    end
+
     # Get all active Teams.
     def find_teams(order_by = nil, order_direction = nil, limit = nil, page = nil)
       params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
@@ -275,6 +287,11 @@ module NutshellCrm
       exec_request build_payload(params)
     end
 
+    def get_task(task_id, rev = nil)
+      params = {:taskId => task_id, :rev => rev}
+      exec_request build_payload(params)
+    end
+
     # Gets the last-updated times of each of the provisioning bins.
     def get_update_times
       exec_request build_payload
@@ -317,6 +334,11 @@ module NutshellCrm
     #   See {Nut_Api_Render_Model_Tag}[http://www.nutshell.com/api/detail/class_nut___api___render___model___tag.html]
     def new_tag(tag)
       exec_request build_payload({:tag => tag})
+    end
+
+    # Create a new Task.
+    def new_task(task)
+      exec_request build_payload({:task => task})
     end
 
     # Return a list of Account stubs matching a given search string.
@@ -372,6 +394,12 @@ module NutshellCrm
     # Delete an Activity 
     def delete_activity(activity_id, rev)
         params = {:activityId => activity_id, :rev => rev}
+        payload = build_payload params
+        exec_request(payload)
+    end
+
+    def delete_task(task_id, rev)
+        params = {:taskId => task_id, :rev => rev}
         payload = build_payload params
         exec_request(payload)
     end
