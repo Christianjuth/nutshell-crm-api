@@ -1,22 +1,22 @@
 # Nutshell CRM [![Build Status](https://secure.travis-ci.org/mshafrir/nutshell-crm.png)](http://travis-ci.org/mshafrir/nutshell-crm)
 
-Author: [mshafrir@gmail.com](mailto:mshafrir@gmail.com)
+Author: [Christian Juth](mailto:cjuth2@gmail.com)
 
 ## Description ##
 
 Nutshell Crm is a Ruby wrapper for the Nutshell Crm API.
 
-[Nutshell API Reference](http://www.nutshell.com/api/)
+[Nutshell API Reference](https://www.nutshell.com/api/detail/class_core.html)
 
 ## Reference ##
 
-- {NutshellCrm::Client}
+- {NutshellCrmAPI::Client}
 
 
 ## Install ##
 
-    gem install nutshell-crm
-    
+    gem install nutshell-crm-api
+
 
 ## Example Usage ##
 
