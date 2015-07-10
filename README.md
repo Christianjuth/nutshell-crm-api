@@ -18,6 +18,12 @@ Nutshell Crm is a Ruby wrapper for the Nutshell Crm API.
     gem install nutshell-crm-api
 
 
+
+## Install ##
+
+    gem install nutshell-crm
+    
+
 ## Example Usage ##
 
     require "nutshell-crm"
