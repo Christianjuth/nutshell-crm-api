@@ -12,6 +12,12 @@ Nutshell Crm is a Ruby wrapper for the Nutshell Crm API.
 
 - {NutshellCrm::Client}
 
+
+## Install ##
+
+    gem install nutshell-crm
+    
+
 ## Example Usage ##
 
     require "nutshell-crm"
@@ -29,9 +35,3 @@ Nutshell Crm is a Ruby wrapper for the Nutshell Crm API.
     # Get the first open lead with full data.
     nutshell.find_leads({status: 0}).first
     #=> {"id"=>1001, "entityType"=>"Leads", "name"=>"Lead\u20131001", "status"=>0, "primaryAccountName"=>nil, "creator"=>{}}
-
-
-
-## Install ##
-
-    gem install nutshell-crm

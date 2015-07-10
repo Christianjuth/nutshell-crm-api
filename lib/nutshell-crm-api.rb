@@ -1,10 +1,10 @@
-require "nutshell-crm/version"
+require "nutshell-crm-api/version"
 
 require 'json'
 require 'httparty'
 
 # @author Michael Shafrir
-module NutshellCrm
+module NutshellCrmAPI
   class Client
 
     attr_accessor :api_url
