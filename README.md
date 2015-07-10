@@ -1,3 +1,7 @@
+# attribute
+
+This gem is a fork of `nutshell-crm` created by [mshafrir@gmail.com](mailto:mshafrir@gmail.com).
+
 # Nutshell CRM [![Build Status](https://secure.travis-ci.org/mshafrir/nutshell-crm.png)](http://travis-ci.org/mshafrir/nutshell-crm)
 
 Author: [Christian Juth](mailto:cjuth2@gmail.com)
