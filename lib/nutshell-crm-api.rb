@@ -45,6 +45,65 @@ module NutshellCrmAPI
       exec_request build_payload
     end
 
+    def delete_account(account_id, rev)
+      params = {accountId: account_id, rev: rev}
+      payload = build_payload params
+      exec_request payload
+    end
+
+    # Delete an Activity
+    def delete_activity(activity_id, rev)
+        params = {activityId: activity_id, rev: rev}
+        payload = build_payload params
+        exec_request(payload)
+    end
+    
+    # Delete a contact. 
+    def delete_contact(contact_id, rev)
+        params = {:contactId => contact_id, :rev => rev}
+        payload = build_payload params
+        exec_request(payload)
+    end
+
+    def delete_lead(lead_id, rev)
+        params = {leadId: activity_id, rev: rev}
+        payload = build_payload params
+        exec_request(payload)
+    end
+
+    def delete_note(note_id, rev)
+        params = {noteId: activity_id, rev: rev}
+        payload = build_payload params
+        exec_request(payload)
+    end
+
+    def delete_product(product_id, rev)
+        params = {productId: product_id, rev: rev}
+        payload = build_payload params
+        exec_request(payload)
+    end
+
+    # Delete a task.
+    def delete_task(task_id, rev)
+        params = {taskId: task_id, rev: rev}
+        payload = build_payload params
+        exec_request(payload)
+    end
+
+    # Delete a task.
+    def delete_team(team_id, rev)
+        params = {teamId: team_id, :rev => rev}
+        payload = build_payload params
+        exec_request(payload)
+    end
+
+    # Delete a user.
+    def delete_user(user_id, rev)
+        params = {userId: user_id, :rev => rev}
+        payload = build_payload params
+        exec_request(payload)
+    end
+
     # Edit an account.
     #
     # @param [Integer] account_id
@@ -389,19 +448,6 @@ module NutshellCrmAPI
     # Return a list of User and Team stubs matching a given search string.
     def search_users_and_teams(query, limit = nil)
       exec_request build_payload({:string => query, :limit => limit})
-    end
-
-    # Delete an Activity 
-    def delete_activity(activity_id, rev)
-        params = {:activityId => activity_id, :rev => rev}
-        payload = build_payload params
-        exec_request(payload)
-    end
-
-    def delete_task(task_id, rev)
-        params = {:taskId => task_id, :rev => rev}
-        payload = build_payload params
-        exec_request(payload)
     end
 
 

@@ -1,6 +1,6 @@
-# Nutshell CRM [![Build Status](https://secure.travis-ci.org/mshafrir/nutshell-crm.png)](http://travis-ci.org/mshafrir/nutshell-crm)
+# Attribute
 
-Author: [Christian Juth](mailto:cjuth2@gmail.com)
+This gem is a fork of `nutshell-crm` created by [mshafrir@gmail.com](mailto:mshafrir@gmail.com).
 
 ## Description ##
 
