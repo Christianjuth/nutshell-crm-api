@@ -31,13 +31,6 @@ module NutshellCrmAPI
       @api_url = "https://#{api_host}/api/v1/json"
     end
 
-    # Saves the given e-mail message.
-    #
-    # @param [String] e-mail in RFC 822 format
-    def add_email(email_string)
-      exec_request build_payload({:emailString => email_string})
-    end
-
     # Gets all of the custom fields available for Leads, Accounts and Contacts, including appropriate meta-information.
     #
     # @return [Object] the custom fields available for Leads, Accounts and Contacts, including appropriate meta-information 
@@ -45,6 +38,13 @@ module NutshellCrmAPI
       exec_request build_payload
     end
 
+
+    # For testing.
+    def add(num1, num2)
+      exec_request build_payload({num1: num1, num2: num2})
+    end
+
+    # Delete an account.
     def delete_account(account_id, rev)
       params = {accountId: account_id, rev: rev}
       payload = build_payload params
@@ -65,18 +65,21 @@ module NutshellCrmAPI
         exec_request(payload)
     end
 
+    # Delete a lead.
     def delete_lead(lead_id, rev)
         params = {leadId: activity_id, rev: rev}
         payload = build_payload params
         exec_request(payload)
     end
 
+    # Deletes the given note.
     def delete_note(note_id, rev)
         params = {noteId: activity_id, rev: rev}
         payload = build_payload params
         exec_request(payload)
     end
 
+    # Delete a product.
     def delete_product(product_id, rev)
         params = {productId: product_id, rev: rev}
         payload = build_payload params
@@ -90,7 +93,7 @@ module NutshellCrmAPI
         exec_request(payload)
     end
 
-    # Delete a task.
+    # Delete a team.
     def delete_team(team_id, rev)
         params = {teamId: team_id, :rev => rev}
         payload = build_payload params
@@ -131,15 +134,36 @@ module NutshellCrmAPI
       exec_request build_payload({:leadId => lead_id, :rev => rev, :lead => lead})
     end
 
+    # Edit a note.
+    def edit_note(note_id, rev, note)
+      exec_request build_payload({noteId: note_id, rev: rev, note: note})
+    end
+
+    # Edit a product.
+    def edit_product(product_id, rev, product)
+      exec_request build_payload({productId: product_id, rev: rev, product: product})
+    end
+
     # Update a process step.
     def edit_step(step_id, rev, step)
-      exec_request build_payload({:stepId => step_id, :rev => rev, :step => step})
+      exec_request build_payload({stepId: step_id, rev: rev, step: step})
     end
 
     # Edit a task.
     def edit_task(task_id, rev, task)
-      exec_request build_payload({:taskId => task_id, :rev => rev, :task => task})
+      exec_request build_payload({taskId: task_id, rev: rev, task: task})
     end
+
+    # Edit a team.
+    def edit_team(team_id, rev, team)
+      exec_request build_payload({teamId: team_id, rev: rev, team: team})
+    end
+
+    # Edit a user.
+    def edit_user(user_id, rev, user)
+      exec_request build_payload({userId: user_id, rev: rev, user: user})
+    end
+
 
     # Find accounts matching a specified query.
     def find_accounts(query, order_by = nil, order_direction = nil, limit = nil, page = nil, stub_responses = nil)
@@ -167,6 +191,12 @@ module NutshellCrmAPI
       params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
       payload = build_payload params
       exec_request(payload)
+    end
+
+    def find_backups()
+      params = {}
+      payload = build_payload params
+      exec_request payload
     end
 
     # Get all active Competitors.
