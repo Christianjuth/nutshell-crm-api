@@ -26,32 +26,28 @@ module NutshellCrmAPI
       @api_key = api_key
       @stub_responses = nil
 
-      result = exec_request(build_payload({:username => @username}), 'http://api.nutshell.com/v1/json')
+      params ={username: @username}
+      payload = build_payload(params)
+      result = exec_request(payload, 'http://api.nutshell.com/v1/json')
       api_host = result['api']
       @api_url = "https://#{api_host}/api/v1/json"
     end
 
-    # Gets all of the custom fields available for Leads, Accounts and Contacts, including appropriate meta-information.
-    #
-    # @return [Object] the custom fields available for Leads, Accounts and Contacts, including appropriate meta-information 
-    def describe_custom_fields
-      exec_request build_payload
-    end
-
-
     # For testing.
     def add(num1, num2)
-      exec_request build_payload({num1: num1, num2: num2})
+      params = {num1: num1, num2: num2}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Delete an account.
     def delete_account(account_id, rev)
       params = {accountId: account_id, rev: rev}
       payload = build_payload params
-      exec_request payload
+      exec_request(payload)
     end
 
-    # Delete an Activity
+    # Delete an activity.
     def delete_activity(activity_id, rev)
         params = {activityId: activity_id, rev: rev}
         payload = build_payload params
@@ -60,7 +56,7 @@ module NutshellCrmAPI
     
     # Delete a contact. 
     def delete_contact(contact_id, rev)
-        params = {:contactId => contact_id, :rev => rev}
+        params = {contactId: contact_id, rev: rev}
         payload = build_payload params
         exec_request(payload)
     end
@@ -95,389 +91,512 @@ module NutshellCrmAPI
 
     # Delete a team.
     def delete_team(team_id, rev)
-        params = {teamId: team_id, :rev => rev}
+        params = {teamId: team_id, rev: rev}
         payload = build_payload params
         exec_request(payload)
     end
 
     # Delete a user.
     def delete_user(user_id, rev)
-        params = {userId: user_id, :rev => rev}
+        params = {userId: user_id, rev: rev}
         payload = build_payload params
         exec_request(payload)
     end
 
     # Edit an account.
-    #
-    # @param [Integer] account_id
-    #   account ID to edit
-    # @param [String] rev
-    #   the revision
-    # @param [Hash] account
-    #   updated account information
     def edit_account(account_id, rev, account)
-      exec_request build_payload({:accountId => account_id, :rev => rev, :account => account})
+      params = {accountId: account_id, rev: rev, account: account}
+      payload = build_payload params
+      exec_request(payload)
     end
 
     # Edit an activity.
     def edit_activity(activity_id, rev, activity)
-      exec_request build_payload({:activityId => activity_id, :rev => rev, :activity => activity})
+      params = {activityId: activity_id, rev: rev, activity: activity}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Edit a contact.
     def edit_contact(contact_id, rev, contact)
-      exec_request build_payload({:contactId => contact_id, :rev => rev, :contact => contact})
+      params = {contactId: contact_id, rev: rev, contact: contact}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Edit a lead.
     def edit_lead(lead_id, rev, lead)
-      exec_request build_payload({:leadId => lead_id, :rev => rev, :lead => lead})
+      params = {leadId: lead_id, rev: rev, lead: lead}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
-    # Edit a note.
+    # Edits the given note (note that notes can
+    # only be edited for 24 hours by the note author)
     def edit_note(note_id, rev, note)
-      exec_request build_payload({noteId: note_id, rev: rev, note: note})
+      params = {noteId: note_id, rev: rev, note: note}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Edit a product.
     def edit_product(product_id, rev, product)
-      exec_request build_payload({productId: product_id, rev: rev, product: product})
+      params = {productId: product_id, rev: rev, product: product}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Update a process step.
     def edit_step(step_id, rev, step)
-      exec_request build_payload({stepId: step_id, rev: rev, step: step})
+      params = {stepId: step_id, rev: rev, step: step}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Edit a task.
     def edit_task(task_id, rev, task)
-      exec_request build_payload({taskId: task_id, rev: rev, task: task})
+      params = {taskId: task_id, rev: rev, task: task}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Edit a team.
     def edit_team(team_id, rev, team)
-      exec_request build_payload({teamId: team_id, rev: rev, team: team})
+      params = {teamId: team_id, rev: rev, team: team}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Edit a user.
     def edit_user(user_id, rev, user)
-      exec_request build_payload({userId: user_id, rev: rev, user: user})
+      params = {userId: user_id, rev: rev, user: user}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
 
     # Find accounts matching a specified query.
     def find_accounts(query, order_by = nil, order_direction = nil, limit = nil, page = nil, stub_responses = nil)
-      params = {:query => query, :orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page, :stubResponses => stub_responses}
-      payload = build_payload params
+      params = {query: query, orderBy: order_by, orderDirection: order_direction, limit: limit, page: page, stubResponses: stub_responses}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Get all active account types (to be applied to an account).
     def find_account_types(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Find activities matching a specified query. 
     def find_activities(query, order_by = nil, order_direction = nil, limit = nil, page = nil, stub_responses = nil)
-      params = {:query => query, :orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page, :stubResponses => stub_responses}
-      payload = build_payload params
+      params = {query: query, orderBy: order_by, orderDirection: order_direction, limit: limit, page: page, stubResponses: stub_responses}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Get all active activity types.
     def find_activity_types(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
-    def find_backups()
-      params = {}
-      payload = build_payload params
-      exec_request payload
+    # List available and running backups.
+    def find_backups
+      exec_request build_payload
     end
 
-    # Get all active Competitors.
+    # Returns stubs for all active Competitors.
     def find_competitors(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Find contacts associated with a specified account or lead.
     def find_contacts(query, order_by = nil, order_direction = nil, limit = nil, page = nil, stub_responses = nil)
-      params = {:query => query, :orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page, :stubResponses => stub_responses}
-      payload = build_payload params
+      params = {query: query, orderBy: order_by, orderDirection: order_direction, limit: limit, page: page, stubResponses: stub_responses}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
-    # Get all active Delays (seen in Step responses in availableDelayIds).
+    # Gets all of the custom fields available for Leads, Accounts 
+    # and Contacts, including appropriate meta-information.
+    def find_custom_fields
+      exec_request(build_payload)
+    end
+
+    # Returns stubs for all active Delays (seen in Step 
+    # responses in availableDelayIds)
     def find_delays(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
-    # Get all active Industries (to be applied to an account)
+    # Returns stubs for all active Industries (to be applied to an account)
     def find_industries(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Get all possible outcomes for a closed lead.
     def find_lead_outcomes(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params, 'findLead_Outcomes'
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params, 'findLead_Outcomes')
       exec_request(payload)
     end
 
     # Find leads matching a specified query.
     def find_leads(query, order_by = nil, order_direction = nil, limit = nil, page = nil, stub_responses = nil)
-      params = {:query => query, :orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page, :stubResponses => stub_responses}
-      payload = build_payload params
+      params = {query: query, orderBy: order_by, orderDirection: order_direction, limit: limit, page: page, stubResponses: stub_responses}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
-    # Get all active markets.
+    # Returns stubs for all active Markets.
     def find_markets(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Get all active milestones.
     def find_milestones(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
-    # Get all active Origins.
+    # Returns stubs for all active Origins.
     def find_origins(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
+      exec_request(payload)
+    end
+
+    # Finds all processes associated with an entity.
+    def find_processes(query)
+      params = {query: query}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Get all active products.
     def find_products(order_by = nil, order_direction = nil, limit = nil, page = nil, stub_responses = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page, :stubResponses => stub_responses}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page, stubResponses: stub_responses}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Return all publicly-visible settings.
     def find_settings(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
-    # Get all active Sources.
+    # Returns stubs for all active Sources.
     def find_sources(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Get all active tags.
     def find_tags
-      exec_request build_payload
+      exec_request(build_payload)
     end
 
     # Returns an array containing tasks for the given query.
     def find_tasks(query)
-      params = {:query => query}
-      payload = build_payload params
+      params = {query: query}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Get all active Teams.
     def find_teams(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Get all territories.
     def find_territories(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Find timeline events (Activities, Emails and Notes) for an Entity.
     def find_timeline(query, order_by = nil, order_direction = nil, limit = nil, page = nil, stub_responses = nil)
-      params = {:query => query, :orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page, :stubResponses => stub_responses}
-      payload = build_payload params
+      params = {query: query, orderBy: order_by, orderDirection: order_direction, limit: limit, page: page, stubResponses: stub_responses}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
-    # Get all active Users.
+    # Find users matching a specified query.
     def find_users(order_by = nil, order_direction = nil, limit = nil, page = nil)
-      params = {:orderBy => order_by, :orderDirection => order_direction, :limit => limit, :page => page}
-      payload = build_payload params
+      params = {orderBy: order_by, orderDirection: order_direction, limit: limit, page: page}
+      payload = build_payload(params)
       exec_request(payload)
     end
 
     # Get the specified Account.
     def get_account(account_id, rev = nil)
-      params = {:accountId => account_id, :rev => rev}
+      params = {accountId: account_id, rev: rev}
       exec_request build_payload(params)
     end
 
     # Get the specified Activity.
     def get_activity(activity_id, rev = nil)
-      params = {:activityId => activity_id, :rev => rev}
+      params = {activityId: activity_id, rev: rev}
       exec_request build_payload(params)
     end
 
     # Returns graph data and overview information for various sales analytics reports.
     def getAnalyticsReport(report_type, period, filter_entity = nil, options = nil)
-      params = {:reportType => report_type, :period => period, :filter => filter_entity, :options => options}
+      params = {reportType: report_type, period: period, filter: filter_entity, options: options}
       exec_request build_payload(params)
     end
 
     # Get the specified Contact.
     def get_contact(contact_id, rev = nil)
-      params = {:contactId => contact_id, :rev => rev}
+      params = {contactId: contact_id, rev: rev}
       exec_request build_payload(params)
     end
 
     # Get the specified Email.
     def get_email(email_id, rev = nil)
-      params = {:emailId => email_id, :rev => rev}
+      params = {emailId: email_id, rev: rev}
       exec_request build_payload(params)
     end
 
-    # Get the specified lead.
+    # Get the specified Lead.
     def get_lead(lead_id, rev = nil)
-      params = {:leadId => lead_id, :rev => rev}
+      params = {leadId: lead_id, rev: rev}
       exec_request build_payload(params)
-    end
-
-    # Return all mobile-related settings in a simple key-value array.
-    def get_mobile_settings
-      exec_request build_payload
     end
 
     # Get the specified Note.
     def get_note(note_id, rev = nil)
-      params = {:noteId => note_id, :rev => rev}
+      params = {noteId: note_id, rev: rev}
       exec_request build_payload(params)
     end
 
     # Get all information for a product (including full price list).
     def get_product(product_id, rev = nil)
-      params = {:productId => product_id, :rev => rev}
+      params = {productId: product_id, rev: rev}
       exec_request build_payload(params)
     end
 
+    # Get the specified Task.
     def get_task(task_id, rev = nil)
-      params = {:taskId => task_id, :rev => rev}
+      params = {taskId: task_id, rev: rev}
+      exec_request build_payload(params)
+    end
+
+    # Get the specified Team.
+    def get_task(team_id, rev = nil)
+      params = {teamId: team_id, rev: rev}
       exec_request build_payload(params)
     end
 
     # Gets the last-updated times of each of the provisioning bins.
     def get_update_times
-      exec_request build_payload
+      exec_request(build_payload)
     end
 
     # Get all info about a user.
     def get_user(user_id = nil, rev = nil)
-      params = {:userId => user_id, :rev => rev}
+      params = {userId: user_id, rev: rev}
       exec_request build_payload(params)
+    end
+
+    # Return data related to authenticated Nutshell instance.
+    def instance_data
+      exec_request(build_payload)
     end
 
     # Create a new account.
     def new_account(account)
-      exec_request build_payload({:account => account})
+      params = {account: account}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Create a new activity.
     def new_activity(activity)
-      exec_request build_payload({:activity => activity})
+      params = {activity: activity}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
-    # Create a new contact.
+    # Initiate downloadable backup.
+    def new_backup
+      exec_request(build_payload)
+    end
+
+    # Create a new Contact.
     def new_contact(contact)
-      exec_request build_payload({:contact => contact})
+      params = {contact: contact}
+      payload = build_payload(params)
+      exec_request(payload)
+    end
+
+    # Saves the given e-mail message.
+    def new_email(emailString)
+      params = {emailString: emailString}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Create a new Lead.
     def new_lead(lead)
-      exec_request build_payload({:lead => lead})
+      params = {lead: lead}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
-    # Create a new Lead.
+    # Adds the note to the given entity.
     def new_note(entity, note)
-      exec_request build_payload({:entity => entity, :note => note})
+      params = {entity: entity, note: note}
+      payload = build_payload(params)
+      exec_request(payload)
+    end
+
+    # Create a new product.
+    def new_product(product)
+      params = {product: product}
+      payload = build_payload(params)
+      exec_request(payload)
+    end
+
+    # Given a source name, fetches an existing
+    # source or creates a new one if it does not exist.
+    def new_source(name)
+      params = {name: name}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Create a new tag.
-    #
-    # @param [Hash] tag
-    #   See {Nut_Api_Render_Model_Tag}[http://www.nutshell.com/api/detail/class_nut___api___render___model___tag.html]
     def new_tag(tag)
-      exec_request build_payload({:tag => tag})
+      params = {tag: tag}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Create a new Task.
     def new_task(task)
-      exec_request build_payload({:task => task})
+      params = {task: task}
+      payload = build_payload(params)
+      exec_request(payload)
+    end
+
+    # Create a new Team.
+    def new_team(team)
+      params = {team: team}
+      payload = build_payload(params)
+      exec_request(payload)
+    end
+
+    # Create a new User.
+    def new_user(user)
+      params = {user: user}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Return a list of Account stubs matching a given search string.
     def search_accounts(query, limit = nil)
-      exec_request build_payload({:string => query, :limit => limit})
+      params = {string: query, limit: limit}
+      payload = build_payload(params)
+      exec_request(payload)
+    end
+
+    # Return a list of stubs matching a given search string for
+    # all entities that could be participants in an Activity.
+    def search_activity_participants(query, limit = nil)
+      params = {string: query, limit: limit}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Works just like searchUniversal, but only searches by email address.
     def search_by_email(email_address)
-      exec_request build_payload({:emailAddressString => email_address})
+      params = {emailAddressString: email_address}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Return a list of Competitor stubs matching a given search string.
     def search_competitors(query, limit = nil)
-      exec_request build_payload({:string => query, :limit => limit})
+      params = {string: query, limit: limit}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Return a list of Contact stubs matching a given search string.
     def search_contacts(query, limit = nil)
-      exec_request build_payload({:string => query, :limit => limit})
+      params = {string: query, limit: limit}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Return a list of Contact and User stubs matching a given search string.
     def search_contacts_and_users(query, limit = nil)
-      exec_request build_payload({:string => query, :limit => limit})
+      params = {string: query, limit: limit}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Return a list of Lead stubs matching a given search string.
     def search_leads(query, limit = nil)
-      exec_request build_payload({:string => query, :limit => limit})
+      params = {string: query, limit: limit}
+      payload = build_payload(params)
+      exec_request(payload)
+    end
+
+    # Returns an array of mentionable entities matching the string,
+    # but excluding any that the client already knows about, 
+    # as indicated by knownLocalResults.
+    def search_mentionable_entities(query, entityType, entityId, knownLocalEntities, limit = nil)
+      params = {string: query, entityType: entityType, entityId: entityId, knownLocalEntities: knownLocalEntities, limit: limit}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Return a list of Product stubs matching a given search string.
     def search_products(query, limit = nil)
-      exec_request build_payload({:string => query, :limit => limit})
+      params = {string: query, limit: limit}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Return a list of Source stubs matching a given search string.
     def search_sources(query, limit = nil)
-      exec_request build_payload({:string => query, :limit => limit})
+      params = {string: query, limit: limit}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Return a list of Contact, Lead, and Account stubs matching a given search string.
     def search_universal(query)
-      exec_request build_payload({:string => query})
+      params = {string: query}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
     # Return a list of User and Team stubs matching a given search string.
     def search_users_and_teams(query, limit = nil)
-      exec_request build_payload({:string => query, :limit => limit})
+      params = {string: query, limit: limit}
+      payload = build_payload(params)
+      exec_request(payload)
     end
 
 
@@ -503,7 +622,7 @@ module NutshellCrmAPI
       end
 
       # Create the payload
-      payload = {:method => camelcase(method), :id => generate_request_id}
+      payload = {method: camelcase(method), id: generate_request_id}
 
       # Filter out keys with nil values.
       payload[:params] = params.reject {|k,v| v.nil?} unless params.nil?
@@ -523,9 +642,9 @@ module NutshellCrmAPI
     # Executes an arbitrary request.
     def exec_request(payload, override_url = nil)
       response = HTTParty.post(override_url.nil? ? @api_url : override_url,
-        :basic_auth => {:username => @username, :password => @api_key},
-        :body => payload,
-        :query => {:output => :json}
+        basic_auth: {username: @username, password: @api_key},
+        body: payload,
+        query: {output: :json}
       )
 
       unless response['error'].nil?
@@ -538,6 +657,8 @@ module NutshellCrmAPI
       response['result']
     end
 
+    # Conbert method_name to camelcase so it can
+    # call the correct API function.
     def camelcase(method_name)
       parts = []
       method_name.split('_').each_with_index {|str, idx| parts << (idx == 0 ? str : str.capitalize)}
